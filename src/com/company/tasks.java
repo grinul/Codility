@@ -1,30 +1,29 @@
 package com.company;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 public class tasks {
+	public static void main(String[] args) {
 
-    public static void main(String[] args) {
-          int[] B = {1, 2, 3, 5};
-        //int[] B = {3, 1, 2, 4, 3};
-        //int[] B = {-1000, 1000};
-        //System.out.print(solutionDifference(B));
-        System.out.print(solutionFrog(10, 200, 30));
-        //System.out.print(solutionMissing(B));
+		int X = 1;
+		int[] A = {3, 2, 4, 6, 8};
+		int[] result = solutionCyclicRotation(A, X);
+		int[] ex = {8, 3, 2, 4, 6};
+		Assert.assertArrayEquals(result, ex);
+		for(int x : result){
+			System.out.print(x + ", ");
+		}
 
+	}
+	public static int[] solutionCyclicRotation(int[] A, int K) {
+		int[] B = new int[A.length];
+		for (int i = 0; i <= A.length-1; i++) {
+			B[(K+i)%A.length] = A[i];
+		}
+		return B;
+	}
 
-
-        //int[] A = {1, 1, 4, 5, 3, 2};
-        //int[] A = {1,2,5,2,3,1,3,4};
-        int[] A = {1, 4, 2, 5, 3};
-        //int[] A = {1, 1};
-        int X = 5;
-        //System.out.print(solutionFrogRiver(A, X));
-        System.out.print(solutionPermutation(A));
-    }
-
-    public static int solutionDifference(int[] B) {
+	public static int solutionDifference(int[] B) {
         int sum1 = B[0];
         int sum2 = 0;
 
@@ -42,12 +41,10 @@ public class tasks {
         }
         return minDif;
     }
-
-    public static int solutionFrog(int x, int y, int d) {
-        return (int)Math.ceil(((double)y - x)/d);
+	public static int solutionFrogJump(int x, int y, int d) {
+		return (int)Math.ceil(((double)y - x)/d);
     }
-
-    public static int solutionMissing(int[] A) {
+	public static int solutionMissing(int[] A) {
         long sumaElementiv = 0;
         for (int i = 0; i < A.length; i++) {
             sumaElementiv = sumaElementiv + A[i];
@@ -56,9 +53,7 @@ public class tasks {
         long sumaProgresii = aLast*(1+aLast)/2;
         return (int)sumaProgresii - (int)sumaElementiv;
     }
-
-
-    public static int solutionFrogRiver(int[] A, int X) {
+	public static int solutionFrogRiver(int[] A, int X) {
         int[] B = new int[X];
 
         for (int s = 0; s < X; s++) {
@@ -78,8 +73,7 @@ public class tasks {
         }
         return -1;
     }
-
-    public static int solutionPermutation(int[] A) {
+	public static int solutionPermutation(int[] A) {
         int[] B = new int[A.length];
         for (int s = 0; s < A.length; s++) {
             B[s] = -1;
@@ -99,6 +93,20 @@ public class tasks {
         }
         return 0;
     }
+	public static int[] solutionCyclicRotation2(int[] A, int K) {
+		if (A.length == 0) {
+			return A;
+		} else
+		for (int i = 0; i <= K-1; i++) {
+			int last = A[A.length - 1];
+			for (int j = A.length-1; j >= 1; j--) {
+				A[j] = A[j-1];
+			}
+			A[0] = last;
+		}
+		return A;
+	}
 }
+
 
 
